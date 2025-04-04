@@ -2,6 +2,9 @@
   publish = "dist/photobook"
   command = "ng build --configuration production"
 
+[functions]
+  directory = "netlify/functions" # Thư mục chứa các hàm (nếu có)
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
