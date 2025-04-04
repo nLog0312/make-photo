@@ -13,12 +13,12 @@ export class TakeWithCameraComponent implements OnInit {
   frameOptions = [
     {
       name: 'Smile',
-      url: 'assets/smile.png',
+      url: 'assets/images/smile.png',
       styleImage1st: 'margin-top: 1.3em;'
     },
     {
       name: 'Green Clean Aesthetic Photostrip',
-      url: 'assets/Green Clean Aesthetic Photostrip.png',
+      url: 'assets/images/Green Clean Aesthetic Photostrip.png',
       styleImage1st: 'margin-top: -5px;'
     }
   ];

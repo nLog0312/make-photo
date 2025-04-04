@@ -41,15 +41,15 @@
       <img id="photostrip-frame" [src]="selectedFrame.url" alt="" srcset="">
 
       <div class="photo text-center overflow-hidden d-flex flex-column">
-        <!-- <div class="photo-item photo-1" [style]="selectedFrame.styleImage1st" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 ? images[0].url : 'assets/default.png') + ')'}"></div>
-        <div class="photo-item photo-2" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[1] ? images[1].url : 'assets/default.png') + ')'}"></div>
-        <div class="photo-item photo-3" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[2] ? images[2].url : 'assets/default.png') + ')'}"></div>
-        <div class="photo-item photo-4" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[3] ? images[3].url : 'assets/default.png') + ')'}"></div> -->
+        <!-- <div class="photo-item photo-1" [style]="selectedFrame.styleImage1st" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 ? images[0].url : 'assets/images/default.png') + ')'}"></div>
+        <div class="photo-item photo-2" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[1] ? images[1].url : 'assets/images/default.png') + ')'}"></div>
+        <div class="photo-item photo-3" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[2] ? images[2].url : 'assets/images/default.png') + ')'}"></div>
+        <div class="photo-item photo-4" [ngStyle]="{'background-image': 'url(' + (images && images.length > 0 && images[3] ? images[3].url : 'assets/images/default.png') + ')'}"></div> -->
 
-        <img [style]="selectedFrame.styleImage1st" class="photo-item photo-1" [src]="images && images.length > 0 ? images[0].url : 'assets/default.png'" alt="">
-        <img class="photo-item photo-2" [src]="images && images.length > 0 && images[1] ? images[1].url : 'assets/default.png'" alt="">
-        <img class="photo-item photo-3" [src]="images && images.length > 0 && images[2] ? images[2].url : 'assets/default.png'" alt="">
-        <img class="photo-item photo-4" [src]="images && images.length > 0 && images[3] ? images[3].url : 'assets/default.png'" alt="">
+        <img [style]="selectedFrame.styleImage1st" class="photo-item photo-1" [src]="images && images.length > 0 ? images[0].url : 'assets/images/default.png'" alt="">
+        <img class="photo-item photo-2" [src]="images && images.length > 0 && images[1] ? images[1].url : 'assets/images/default.png'" alt="">
+        <img class="photo-item photo-3" [src]="images && images.length > 0 && images[2] ? images[2].url : 'assets/images/default.png'" alt="">
+        <img class="photo-item photo-4" [src]="images && images.length > 0 && images[3] ? images[3].url : 'assets/images/default.png'" alt="">
       </div>
     </div>
   </div>
