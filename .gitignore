@@ -48,6 +48,3 @@ src/environments/*.ts
 # Windows system files
 Thumbs.db
 ehthumbs.db
-
-# Folder for static assets
-/src/assets/
