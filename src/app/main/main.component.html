@@ -1,0 +1,19 @@
+<nz-layout>
+  <nz-content>
+    <div class="card-container">
+      <nz-tabset nzType="card" nzCentered>
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+          <ng-template #titleTemplate>
+            <span nz-icon [nzType]="tab.icon"></span>
+            {{ tab.name }}
+          </ng-template>
+
+          <app-take-with-camera *ngIf="tab.type === 1"></app-take-with-camera>
+          <app-take-with-upload *ngIf="tab.type === 2"></app-take-with-upload>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </nz-content>
+
+  <nz-footer>Footer</nz-footer>
+</nz-layout>

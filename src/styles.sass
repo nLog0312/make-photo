@@ -1,0 +1,137 @@
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+
+/* You can add global styles to this file, and also import other style files */
+*
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 100%
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 100%
+
+html
+  scrollbar-width: none
+  -ms-overflow-style: none
+  height: unset !important
+
+html::-webkit-scrollbar
+  display: none
+
+ol,
+ul
+  list-style: none !important
+
+a
+  text-decoration: none !important
+  color: #F14E95
+  -webkit-transition: 0.5s
+  -o-transition: 0.5s
+  transition: 0.5s
+a:hover,
+a:active,
+a:focus
+  color: #F14E95
+  outline: none
+  text-decoration: none
+
+p
+  margin-bottom: 20px
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure
+  color: #000
+  font-family: "Work Sans", Arial, sans-serif
+  font-weight: 400
+  margin: 0 0 20px 0
+
+::-webkit-selection
+  color: #fff
+  background: #F14E95
+
+::-moz-selection
+  color: #fff
+  background: #F14E95
+
+::selection
+  color: #fff
+  background: #F14E95
+
+
+.offcanvas-out-bootstrap #page
+  overflow: hidden
+  position: absolute
+
+.offcanvas-out-bootstrap #page:after
+  content: ""
+  -webkit-transition: 2s
+  -o-transition: 2s
+  transition: 2s
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 101
+  background: rgba(0, 0, 0, 0.7)
+
+
+#offcanvas
+  position: absolute
+  z-index: 1901
+  width: 270px
+  background: black
+  top: 0
+  right: 0
+  bottom: 0
+  padding: 45px 40px 40px 40px
+  overflow-y: auto
+  -moz-transform: translateX(270px)
+  -webkit-transform: translateX(270px)
+  -ms-transform: translateX(270px)
+  -o-transform: translateX(270px)
+  transform: translateX(270px)
+  -webkit-transition: 0.5s
+  -o-transition: 0.5s
+  transition: 0.5s
+.offcanvas-out-bootstrap #offcanvas
+  -moz-transform: translateX(0px)
+  -webkit-transform: translateX(0px)
+  -ms-transform: translateX(0px)
+  -o-transform: translateX(0px)
+  transform: translateX(0px)
+#offcanvas a
+  color: rgba(255, 255, 255, 0.5)
+#offcanvas a:hover
+  color: rgba(255, 255, 255, 0.8)
+#offcanvas ul
+  padding: 0
+  margin: 0
+#offcanvas ul li
+  padding: .5rem 0 !important
+  list-style: none
+  margin: 1rem 0 !important
+#offcanvas ul li > ul
+  padding-left: 20px
+  display: none
