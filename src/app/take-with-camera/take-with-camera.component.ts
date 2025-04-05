@@ -46,19 +46,18 @@ export class TakeWithCameraComponent implements OnInit {
   }
 
   downloadPhotostip() {
-    let node = document.getElementById('photostrip-preview');
+    const node = document.getElementById('photostrip-preview');
     if (!node) return;
 
-    htmlToImage
-    .toPng(node)
-    .then(function (dataUrl) {
-      const link = document.createElement('a');
-      link.href = dataUrl;
-      link.download = 'photo-strip.png';
-      link.click();
-    })
-    .catch(function (error) {
-      console.error('oops, something went wrong!', error);
-    });
+    htmlToImage.toPng(node, { pixelRatio: 2 }) // tăng lên 2x độ phân giải
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = 'photo-strip.png';
+        link.click();
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
   }
 }

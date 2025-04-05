@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as htmlToImage from 'html-to-image';
 
 @Component({
   selector: 'app-take-with-upload',
@@ -6,10 +7,57 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./take-with-upload.component.scss']
 })
 export class TakeWithUploadComponent implements OnInit {
+images: { url: string | ArrayBuffer | null | undefined, file: File }[] = [];
+  selectedFrame: any;
 
-  constructor() { }
+  frameOptions = [
+    {
+      name: 'Smile',
+      url: 'assets/images/smile.png',
+      styleImage1st: 'margin-top: 1.3em;'
+    },
+    {
+      name: 'Green Clean Aesthetic Photostrip',
+      url: 'assets/images/Green Clean Aesthetic Photostrip.png',
+      styleImage1st: 'margin-top: -5px;'
+    }
+  ];
 
-  ngOnInit() {
+
+  ngOnInit(): void {
+    this.selectedFrame = this.frameOptions[0];
   }
 
+  onFilesSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      Array.from(input.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push({ url: e.target?.result, file });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  removeImage(index: number): void {
+    this.images.splice(index, 1);
+  }
+
+  downloadPhotostip() {
+    const node = document.getElementById('photostrip-preview');
+    if (!node) return;
+
+    htmlToImage.toPng(node, { pixelRatio: 2 }) // tăng lên 2x độ phân giải
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = 'photo-strip.png';
+        link.click();
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
+  }
 }
