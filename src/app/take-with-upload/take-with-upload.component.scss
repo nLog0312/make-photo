@@ -1,0 +1,111 @@
+.custum-file-upload {
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+.preview-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.preview {
+  position: relative;
+  display: inline-block;
+}
+
+.preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.preview .remove-btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+nz-select {
+  width: 100%;
+}
+
+#download-btn {
+  border-radius: 2px !important;
+}
+
+/* 4 ảnh con */
+#photostrip-preview {
+  position: relative;
+  margin: 10px;
+}
+
+#photostrip-frame {
+  max-height: 490px;
+  width: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  border: 1px solid gray;
+}
+
+.photo {
+  position: absolute;
+  top: 0;
+  max-height: 490px;
+}
+
+.photo-item {
+  width: 170px;
+  height: 105px;
+  object-fit: cover;
+}
