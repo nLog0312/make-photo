@@ -49,15 +49,28 @@ images: { url: string | ArrayBuffer | null | undefined, file: File }[] = [];
     const node = document.getElementById('photostrip-preview');
     if (!node) return;
 
-    htmlToImage.toPng(node, { pixelRatio: 2 }) // tăng lên 2x độ phân giải
-      .then((dataUrl) => {
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = 'photo-strip.png';
-        link.click();
-      })
-      .catch((error) => {
-        console.error('oops, something went wrong!', error);
-      });
+    const scale = 2;
+    const style = window.getComputedStyle(node);
+    const width = parseInt(style.width, 10);
+    const height = parseInt(style.height, 10);
+
+    htmlToImage.toCanvas(node, {
+      width: width * scale,
+      height: height * scale,
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        width: `${width}px`,
+        height: `${height}px`,
+      }
+    }).then((canvas) => {
+      // Tạo link tải ảnh từ canvas
+      const link = document.createElement('a');
+      link.download = 'photo-strip.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).catch((error) => {
+      console.error('Lỗi khi xuất ảnh:', error);
+    });
   }
 }
