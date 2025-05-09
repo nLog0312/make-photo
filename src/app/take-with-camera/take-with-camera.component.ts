@@ -45,57 +45,32 @@ export class TakeWithCameraComponent implements OnInit {
     this.images.splice(index, 1);
   }
 
-  downloadPhotostip() {
+  downloadPhotostip(): void {
     const node = document.getElementById('photostrip-preview');
-    if (!node) return;
+    if (!node) {
+      console.error('Không tìm thấy DOM cần render');
+      return;
+    }
 
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    htmlToImage.toPng(node, {
+      cacheBust: true,
+      pixelRatio: 2, // tăng pixel ratio để ảnh rõ hơn
+    })
+    .then((dataUrl) => {
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'photo-strip.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-    // Đảm bảo render xong trước khi chụp
-    setTimeout(() => {
-      htmlToImage.toBlob(node, {
-        // Giúp tránh lỗi caching ảnh
-        cacheBust: true,
-        pixelRatio: 2
-      }).then((blob) => {
-        if (!blob) return;
-
-        if (isIOS) {
-          // Dùng FileReader để chuyển blob thành base64
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64data = reader.result as string;
-
-            const newWindow = window.open();
-            if (newWindow) {
-              newWindow.document.write(`
-                <html>
-                  <head><title>Ảnh của bạn</title></head>
-                  <body style="margin:0;">
-                    <img src="${base64data}" style="width:100%;height:auto;" />
-                  </body>
-                </html>
-              `);
-            } else {
-              alert('Vui lòng bật pop-up để xem ảnh.');
-            }
-          };
-          reader.readAsDataURL(blob);
-        } else {
-          // Trình duyệt khác: tải ảnh trực tiếp
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'photo-strip.png';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        }
-      }).catch((error) => {
-        console.error('Lỗi khi xuất ảnh:', error);
-      });
-    }, 300); // Delay nhẹ để DOM ổn định
+      // this.loading = false;
+    })
+    .catch((error) => {
+      console.error('Lỗi khi render ảnh:', error);
+      alert('Không thể tạo ảnh. Vui lòng thử lại.');
+      // this.loading = false;
+    });
   }
 
 }
