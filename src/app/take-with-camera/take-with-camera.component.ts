@@ -49,28 +49,53 @@ export class TakeWithCameraComponent implements OnInit {
     const node = document.getElementById('photostrip-preview');
     if (!node) return;
 
-    const scale = 2;
-    const style = window.getComputedStyle(node);
-    const width = parseInt(style.width, 10);
-    const height = parseInt(style.height, 10);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
-    htmlToImage.toCanvas(node, {
-      width: width * scale,
-      height: height * scale,
-      style: {
-        transform: `scale(${scale})`,
-        transformOrigin: 'top left',
-        width: `${width}px`,
-        height: `${height}px`,
-      }
-    }).then((canvas) => {
-      // Tạo link tải ảnh từ canvas
-      const link = document.createElement('a');
-      link.download = 'photo-strip.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }).catch((error) => {
-      console.error('Lỗi khi xuất ảnh:', error);
-    });
+    // Đảm bảo render xong trước khi chụp
+    setTimeout(() => {
+      htmlToImage.toBlob(node, {
+        // Giúp tránh lỗi caching ảnh
+        cacheBust: true,
+        pixelRatio: 2
+      }).then((blob) => {
+        if (!blob) return;
+
+        if (isIOS) {
+          // Dùng FileReader để chuyển blob thành base64
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result as string;
+
+            const newWindow = window.open();
+            if (newWindow) {
+              newWindow.document.write(`
+                <html>
+                  <head><title>Ảnh của bạn</title></head>
+                  <body style="margin:0;">
+                    <img src="${base64data}" style="width:100%;height:auto;" />
+                  </body>
+                </html>
+              `);
+            } else {
+              alert('Vui lòng bật pop-up để xem ảnh.');
+            }
+          };
+          reader.readAsDataURL(blob);
+        } else {
+          // Trình duyệt khác: tải ảnh trực tiếp
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'photo-strip.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }
+      }).catch((error) => {
+        console.error('Lỗi khi xuất ảnh:', error);
+      });
+    }, 300); // Delay nhẹ để DOM ổn định
   }
+
 }
